@@ -1,5 +1,8 @@
 streamlit
+
+
+streamlit
 pandas
-ydata-profiling
+ydata-profiling==4.6.4
 sweetviz
 
