@@ -8,6 +8,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+"""
 
 st.set_page_config(page_title="Data Dashboard", layout="wide")
 
@@ -47,5 +48,4 @@ if uploaded_file is not None:
         sns.heatmap(df.corr(), annot=True, ax=ax2)
         st.pyplot(fig2)
 
-    else:
-        st.warning("No numeric columns found for plotting.")
+    
