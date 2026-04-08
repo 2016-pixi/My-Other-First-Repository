@@ -4,60 +4,48 @@ st.text('some random text')
 
 
 """
-EDA Workshop Script
-Author: Converted from Jupyter Notebook
-"""
-
-# =========================
-# Imports
-# =========================
+import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Optional libraries (install before running):
-# pip install ydata-profiling sweetviz
+st.set_page_config(page_title="Data Dashboard", layout="wide")
 
-# from ydata_profiling import ProfileReport
-from panda_profiling import ProfileReport
+st.title("📊 Data Analysis Dashboard")
 
-import sweetviz as sv
+# File upload
+uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
 
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
 
-# =========================
-# Load Dataset
-# =========================
-# Make sure the CSV file is in the same directory
-df = pd.read_csv("DAtaSet.csv")
+    st.subheader("Raw Data")
+    st.write(df)
 
+    # Basic info
+    st.subheader("Dataset Info")
+    st.write(df.describe())
 
-# =========================
-# Basic Exploration
-# =========================
-print("\n--- First 5 Rows ---")
-print(df.head())
+    # Column selection
+    numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
 
-print("\n--- Dataset Info ---")
-print(df.describe())
+    if len(numeric_cols) > 0:
+        col1 = st.selectbox("Select X-axis", numeric_cols)
+        col2 = st.selectbox("Select Y-axis", numeric_cols)
 
-print("\n--- Last 5 Rows ---")
-print(df.tail())
-print("\n--- Missing Values ---")
-print(df.isnull().sum())
+        # Scatter plot
+        st.subheader("Scatter Plot")
+        fig, ax = plt.subplots()
+        ax.scatter(df[col1], df[col2])
+        ax.set_xlabel(col1)
+        ax.set_ylabel(col2)
+        st.pyplot(fig)
 
+        # Heatmap
+        st.subheader("Correlation Heatmap")
+        fig2, ax2 = plt.subplots()
+        sns.heatmap(df.corr(), annot=True, ax=ax2)
+        st.pyplot(fig2)
 
-# =========================
-# YData Profiling Report
-# =========================
-profile = ProfileReport(df, title="EDA Report", explorative=True)
-
-# Save report to HTML file
-profile.to_file("eda_report.html")
-
-# =========================
-# Sweetviz Report
-# =========================
-report = sv.analyze(df)
-
-# Save report to HTML file
-report.show_html("sweetviz_report.html")
-
-
+    else:
+        st.warning("No numeric columns found for plotting.")
