@@ -15,7 +15,9 @@ import pandas as pd
 
 # Optional libraries (install before running):
 # pip install ydata-profiling sweetviz
+
 from ydata_profiling import ProfileReport
+
 import sweetviz as sv
 
 
