@@ -17,7 +17,7 @@ import pandas as pd
 # pip install ydata-profiling sweetviz
 
 # from ydata_profiling import ProfileReport
-from ydata_profiling import ProfileReport
+from panda_profiling import ProfileReport
 
 import sweetviz as sv
 
