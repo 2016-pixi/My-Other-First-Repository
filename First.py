@@ -37,7 +37,6 @@ print(df.describe())
 
 print("\n--- Last 5 Rows ---")
 print(df.tail())
-
 print("\n--- Missing Values ---")
 print(df.isnull().sum())
 
@@ -49,7 +48,6 @@ profile = ProfileReport(df, title="EDA Report", explorative=True)
 
 # Save report to HTML file
 profile.to_file("eda_report.html")
-
 
 # =========================
 # Sweetviz Report
