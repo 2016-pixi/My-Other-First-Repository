@@ -54,6 +54,23 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
 
     st.write(df)
+
+
+import streamlit as st
+import pandas as pd
+
+st.title("Data App")
+
+uploaded_file = st.file_uploader("Upload CSV", type=["csv"])
+
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+
+    st.subheader("Preview")
+    st.write(df.head())
+
+else:
+    st.warning("Upload a file to start.")
 else:
     st.info("Please upload a CSV file to continue.")
 
