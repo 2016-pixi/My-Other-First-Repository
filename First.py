@@ -69,9 +69,12 @@ if uploaded_file is not None:
     st.subheader("Preview")
     st.write(df.head())
 
-else:
-    st.warning("Upload a file to start.")
-else:
+
     st.info("Please upload a CSV file to continue.")
+    if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+    st.write(df)
+else:
+    st.write("No file")
 
     
