@@ -48,4 +48,13 @@ if uploaded_file is not None:
         sns.heatmap(df.corr(), annot=True, ax=ax2)
         st.pyplot(fig2)
 
+uploaded_file = st.file_uploader("Upload CSV", type=["csv"])
+
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+
+    st.write(df)
+else:
+    st.info("Please upload a CSV file to continue.")
+
     
